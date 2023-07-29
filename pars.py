@@ -1,12 +1,14 @@
 import requests
 from bs4 import BeautifulSoup as bs
-import pandas as pd
+import tkinter as tk
+from tkinter import font
 
+##########################################################################
 
 MY_SNILS = "177-498-905-45"
-
 URL_TEMPLATE = "https://priem.mirea.ru/accepted-entrants-list/personal_code_rating.php?competition=1748205826355502390"
 
+############################################################################
 
 request = requests.get(URL_TEMPLATE)
 
@@ -49,7 +51,48 @@ lastAbiturientSum = lastAbiturient.find('td', 'sum').string
 print("Общий балл: " + lastAbiturientSum)
 print("___________________________________")
 
-  
+
+
+root = tk.Tk()
+root.title("Какой ты в списках")
+root.geometry("360x310")
+font = font.Font(family= "Verdana", size=16, weight="normal", slant="roman")
+
+lbYNum = tk.Label(text=("Ваше место в списке: " + yourNum), font=font)
+lbYNum.pack()
+
+lbYMark = tk.Label(text=("Ваш балл за экзамен: " + yourMark), font=font)
+lbYMark.pack()
+
+lbYAchive = tk.Label(text=("Ваш балл за ИД: " + yourAchivments), font=font)
+lbYAchive.pack()
+
+lbYSum = tk.Label(text=("Ваш общий балл: " + yourSum), font=font)
+lbYSum.pack()
+
+lbSep = tk.Label(text=("------------------------------------------------------------------"), font=font)
+lbSep.pack()
+
+lbTender = tk.Label(text=("Всего мест на направление: " + str(tender)), font=font)
+lbTender.pack()
+
+lbTenderAb = tk.Label(text=("На " + str(tender) + " месте находится абитуриент с баллами:"), font=font)
+lbTender.pack()
+
+lbTenderAbNum = tk.Label(text=("Место в списке: " + lastAbiturientNum), font=font)
+lbTenderAbNum.pack()
+
+lbTenderAbMark = tk.Label(text=("Балл за экзамен: " + lastAbiturientMark), font=font)
+lbTenderAbMark.pack()
+
+lbTenderAbAchive = tk.Label(text=("Балл за ИД: " + lastAbiturientAchivments), font=font)
+lbTenderAbAchive.pack()
+
+lbTenderAbSum = tk.Label(text=("Общий балл: " + lastAbiturientSum), font=font)
+lbTenderAbSum.pack()
+
+root.mainloop()
+
   # if(someName == MY_SNILS):
   #   for td in name:
   #     print(td.string)
